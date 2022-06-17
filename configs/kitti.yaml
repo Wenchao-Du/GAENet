@@ -1,0 +1,58 @@
+#!/usr/bin/env python
+# -*- encoding: utf-8 -*-
+#'''
+#@File    :   kitti.yaml
+#@Time    :   2020/09/25
+#@Author  :   Garified Du
+#@Version :   1.0
+#@License :   Licensed under the CC BY-NC 4.0 license (https://creativecommons.org/licenses/by-nc/4.0/)
+#@Desc    :   config for kit training
+#'''
+
+cudnn: True
+gpuid: "0"
+port: "29500"
+seed: 2001
+save_freq: 2000
+print_freq: 10
+# dataset settings
+dataset: kitti
+data_root: /mnt/90C68C19C68C01A8/3D_Ori_VisonSet/KITTI_Dataset
+split_json: ./data_json/kitti_dc.json
+save_root: checkfolder
+crop_h: 352
+crop_w: 1216
+flip: hflip #vertical|horizontal
+jitter: 0.1 # jitter image color
+nsp: 10000 # the number of sampling points
+max_depth: 90.0
+knn: 9
+batch_size: 4
+threads: 8
+
+# model hyper parameter setting
+epoches: 50
+lr: 2e-3
+weight_decay: 0.5
+niter_decay: 10
+lr_policy: step #{lambda|step|plateau}
+lr_decay_iters: 10
+clip_grad_norm: 0
+# optimization
+optimizer: adam
+gamma1: 0.9
+gamma2: 0.99
+loss_type: mse
+
+# network configuration
+weight_init: kaiming
+in_channel: 1
+out_channel: 1
+gchannel: 16
+pretrained: ~
+pretrained_2: ~
+# eval the model in testset
+eval: False
+resume: None
+model_path: checkfolder/batch_4_lr_1e-2_nsp_8000_knn_9/model_best.pth.tar
+save_path: checkfolder/batch_4_lr_1e-2_nsp_8000_knn_9/testset

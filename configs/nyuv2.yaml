@@ -1,0 +1,56 @@
+#!/usr/bin/env python
+# -*- encoding: utf-8 -*-
+#'''
+#@File    :   kitti.yaml
+#@Time    :   2020/09/25
+#@Author  :   Garified Du
+#@Version :   1.0
+#@License :   Licensed under the CC BY-NC 4.0 license (https://creativecommons.org/licenses/by-nc/4.0/)
+#@Desc    :   config for kit training
+#'''
+
+cudnn: True
+gpuid: [0]
+save_freq: 1000
+print_freq: 10
+# dataset settings
+dataset: nyuv2
+data_root: /mnt/90C68C19C68C01A8/3D_Ori_VisonSet/NYU_V2/nyudepthv2/
+save_root: checkfolder_nyu
+crop_h: 224
+crop_w: 304
+flip: hflip #vertical|horizontal
+jitter: 0.1 # jitter image color
+nsp: 500 # the number of sampling points
+samples: 500 #
+max_depth: 10.0
+knn: 9
+batch_size: 16
+threads: 8
+
+# model hyper parameter setting
+epoches: 60
+lr: 1e-2
+weight_decay: 0.5
+niter_decay: 10
+lr_policy: step #{lambda|step|plateau}
+lr_decay_iters: 20
+clip_grad_norm: 0
+resume: None #/mnt/725AAA345AA9F54F/LFNet_Dist/checkfolder_nyu/batch_16_lr_1e-2_nsp_200_knn_9/model_best.pth.tar
+# optimization
+optimizer: adam
+gamma1: 0.9
+gamma2: 0.99
+loss_type: mse
+
+# network configuration
+weight_init: kaiming
+in_channel: 1
+out_channel: 1
+gchannel: 16
+pretrained: downloads/erfnet_pretrained.pth
+pretrained_2: downloads/model.1024.t7
+# eval the model in testset
+eval: True
+model_path: /mnt/725AAA345AA9F54F/LFNet_Dist/checkfolder/batch_16_lr_1e-2_nsp_500_knn_9/model_best.pth.tar
+save_path: /mnt/725AAA345AA9F54F/LFNet_Dist/checkfolder/batch_16_lr_1e-2_nsp_500_knn_9/testset_500new
